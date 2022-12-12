@@ -1,0 +1,58 @@
+﻿@model Ml.Libro
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetAll</h2>
+
+<div class="container">
+
+
+    <div class="row">
+        <div style="float:right">
+            @Html.ActionLink("+", "Form", "Libro", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <table class="tablcenter table-hover table-bordered table-responsive ">
+
+            <thead>
+                <tr>
+                    <th>Editar</th>
+
+                    <th>Nombre</th>
+                    <th>Numero de paginas</th>
+                    <th>Fecha de publicacion </th>
+                    <th>Edicion</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Genero</th>
+
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Ml.Libro libro in Model.Libros)
+                {
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Libro", new { IdLibro = libro.IdLibro })"></a></td>
+                        <td class="hidden">@libro.IdLibro</td>
+                        <td>@libro.Nombre </td>
+                        <td> @libro.NumeroDePaginas</td>
+                        <td> @libro.FechaPublicacion</td>
+                        <td> @libro.Edicion</td>
+                        <td> @libro.Autor.Nombre</td>
+                        <td> @libro.Editorial.Nombre</td>
+                        <td> @libro.Genero.Nombre</td>
+
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Libro", new { IdLibro = libro.IdLibro })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
